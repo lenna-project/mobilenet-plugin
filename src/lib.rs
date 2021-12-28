@@ -1,4 +1,3 @@
-use bytes::Bytes;
 use image::{DynamicImage, Rgba};
 use imageproc::drawing::draw_text_mut;
 use lenna_core::plugins::PluginRegistrar;
@@ -18,41 +17,12 @@ type ModelType = SimplePlan<TypedFact, Box<dyn TypedOp>, Graph<TypedFact, Box<dy
 
 #[derive(Clone)]
 pub struct MobileNet {
-    model: Option<ModelType>,
+    model: ModelType,
 }
 
 impl MobileNet {
-    #[cfg(not(target_arch = "wasm32"))]
-    pub fn download_model() -> reqwest::Result<Bytes> {
-        #[cfg(not(target_arch = "wasm32"))]
-        return reqwest::blocking::get("https://github.com/onnx/models/raw/master/vision/classification/mobilenet/model/mobilenetv2-7.onnx")
-        .unwrap().bytes();
-    }
-
-    #[cfg(target_arch = "wasm32")]
-    pub async fn download_model() -> reqwest::Result<Bytes> {
-        return reqwest::get("https://github.com/onnx/models/raw/master/vision/classification/mobilenet/model/mobilenetv2-7.onnx").await
-        .unwrap().bytes().await;
-    }
-
-    pub fn labels() -> Vec<String> {
-        let collect = include_str!("../assets/imagenet_slim_labels.txt")
-            .to_string()
-            .lines()
-            .map(|s| s.to_string())
-            .collect();
-        collect
-    }
-
-    pub async fn init(&mut self) {
-        #[cfg(target_arch = "wasm32")]
-        let data = Self::download_model().await.unwrap();
-        #[cfg(not(target_arch = "wasm32"))]
-        let data = Self::download_model().unwrap();
-        self.init_model(data);
-    }
-
-    pub fn init_model(&mut self, data: Bytes) {
+    pub fn model() -> ModelType {
+        let data = include_bytes!("../assets/mobilenetv2-7.onnx");
         let mut cursor = Cursor::new(data);
         let model = tract_onnx::onnx()
             .model_for_read(&mut cursor)
@@ -66,20 +36,24 @@ impl MobileNet {
             .unwrap()
             .into_runnable()
             .unwrap();
-        self.model = Some(model);
+        model
+    }
+
+    pub fn labels() -> Vec<String> {
+        let collect = include_str!("../assets/imagenet_slim_labels.txt")
+            .to_string()
+            .lines()
+            .map(|s| s.to_string())
+            .collect();
+        collect
     }
 }
 
 impl Default for MobileNet {
     fn default() -> Self {
-        let mut mobile_net = MobileNet { model: None };
-
-        #[cfg(not(target_arch = "wasm32"))]
-        {
-            let data = Self::download_model().unwrap();
-            mobile_net.init_model(data);
+        MobileNet {
+            model: Self::model(),
         }
-        mobile_net
     }
 }
 
@@ -103,19 +77,14 @@ impl ImageProcessor for MobileNet {
             })
             .into();
 
-        let index = match &self.model {
-            Some(model) => {
-                let result = model.run(tvec!(tensor)).unwrap();
-                let best = result[0]
-                    .to_array_view::<f32>()?
-                    .iter()
-                    .cloned()
-                    .zip(1..)
-                    .max_by(|a, b| a.0.partial_cmp(&b.0).unwrap());
-                best.unwrap().1
-            }
-            None => 0,
-        };
+        let result = self.model.run(tvec!(tensor)).unwrap();
+        let best = result[0]
+            .to_array_view::<f32>()?
+            .iter()
+            .cloned()
+            .zip(1..)
+            .max_by(|a, b| a.0.partial_cmp(&b.0).unwrap());
+        let index = best.unwrap().1;
         let label = Self::labels()[index].to_string();
         println!("{}", label);
 
