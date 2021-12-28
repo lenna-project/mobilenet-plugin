@@ -179,4 +179,23 @@ mod tests {
         img.name = "test".to_string();
         lenna_core::io::write::write_to_file(&img, image::ImageOutputFormat::Jpeg(80)).unwrap();
     }
+
+    #[cfg(target_arch = "wasm32")]
+    mod wasm {
+        use super::*;
+        use lenna_core::LennaImage;
+        use wasm_bindgen_test::*;
+
+        #[wasm_bindgen_test]
+        fn default() {
+            let mut mobilenet = MobileNet::default();
+            let config = ProcessorConfig {
+                id: "mobilenet".into(),
+                config: mobilenet.default_config(),
+            };
+            assert_eq!(mobilenet.name(), "mobilenet");
+            let mut img = Box::new(LennaImage::default());
+            mobilenet.process(config, &mut img).unwrap();
+        }
+    }
 }
