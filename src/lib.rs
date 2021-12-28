@@ -1,9 +1,11 @@
 use bytes::Bytes;
-use image::DynamicImage;
+use image::{DynamicImage, Rgba};
+use imageproc::drawing::{draw_text_mut};
 use lenna_core::plugins::PluginRegistrar;
 use lenna_core::ProcessorConfig;
 use lenna_core::{core::processor::ExifProcessor, core::processor::ImageProcessor, Processor};
 use std::io::Cursor;
+use rusttype::{Font, Scale};
 use tract_onnx::prelude::*;
 
 extern "C" fn register(registrar: &mut dyn PluginRegistrar) {
@@ -59,16 +61,16 @@ impl Default for MobileNet {
 impl ImageProcessor for MobileNet {
     fn process_image(
         &self,
-        _image: &mut Box<DynamicImage>,
+        image: &mut Box<DynamicImage>,
     ) -> Result<(), Box<dyn std::error::Error>> {
-        let image_rgb = _image.to_rgb8();
+        let image_rgb = image.to_rgb8();
         let resized = image::imageops::resize(
             &image_rgb,
             224,
             224,
             ::image::imageops::FilterType::Triangle,
         );
-        let image: Tensor =
+        let tensor: Tensor =
             tract_ndarray::Array4::from_shape_fn((1, 3, 224, 224), |(_, c, y, x)| {
                 let mean = [0.485, 0.456, 0.406][c];
                 let std = [0.229, 0.224, 0.225][c];
@@ -76,7 +78,7 @@ impl ImageProcessor for MobileNet {
             })
             .into();
 
-        let result = self.model.run(tvec!(image))?;
+        let result = self.model.run(tvec!(tensor))?;
         let best = result[0]
             .to_array_view::<f32>()?
             .iter()
@@ -84,7 +86,21 @@ impl ImageProcessor for MobileNet {
             .zip(1..)
             .max_by(|a, b| a.0.partial_cmp(&b.0).unwrap());
         let index = best.unwrap().1;
-        println!("{}", Self::labels()[index]);
+        let label = Self::labels()[index].to_string();
+        println!("{}", label);
+
+        let mut img = DynamicImage::ImageRgba8(image.to_rgba8());
+
+        let font = Vec::from(include_bytes!("../assets/DejaVuSans.ttf") as &[u8]);
+        let font = Font::try_from_vec(font).unwrap();
+    
+        let height = 12.4;
+        let scale = Scale {
+            x: height * 2.0,
+            y: height,
+        };
+        draw_text_mut(&mut img, Rgba([0u8, 0u8, 0u8, 255u8]), 0, 0, scale, &font, &label);
+        *image = Box::new(img);
         Ok(())
     }
 }
