@@ -67,9 +67,20 @@ impl Processor for MobileNet {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use lenna_core::ProcessorConfig;
+
     #[test]
-    fn it_works() {
-        let plugin = MobileNet {};
-        assert_eq!(plugin.name(), "mobilenet");
+    fn default() {
+        let mut mobilenet = MobileNet::default();
+        let config = ProcessorConfig {
+            id: "mobilenet".into(),
+            config: mobilenet.default_config(),
+        };
+        assert_eq!(mobilenet.name(), "mobilenet");
+        let mut img =
+            Box::new(lenna_core::io::read::read_from_file("assets/lenna.png".into()).unwrap());
+        mobilenet.process(config, &mut img).unwrap();
+        img.name = "test".to_string();
+        lenna_core::io::write::write_to_file(&img, image::ImageOutputFormat::Jpeg(80)).unwrap();
     }
 }
