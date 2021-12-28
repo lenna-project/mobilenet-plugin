@@ -1,11 +1,11 @@
 use bytes::Bytes;
 use image::{DynamicImage, Rgba};
-use imageproc::drawing::{draw_text_mut};
+use imageproc::drawing::draw_text_mut;
 use lenna_core::plugins::PluginRegistrar;
 use lenna_core::ProcessorConfig;
 use lenna_core::{core::processor::ExifProcessor, core::processor::ImageProcessor, Processor};
-use std::io::Cursor;
 use rusttype::{Font, Scale};
+use std::io::Cursor;
 use tract_onnx::prelude::*;
 
 extern "C" fn register(registrar: &mut dyn PluginRegistrar) {
@@ -18,13 +18,21 @@ type ModelType = SimplePlan<TypedFact, Box<dyn TypedOp>, Graph<TypedFact, Box<dy
 
 #[derive(Clone)]
 pub struct MobileNet {
-    model: ModelType,
+    model: Option<ModelType>,
 }
 
 impl MobileNet {
+    #[cfg(not(target_arch = "wasm32"))]
     pub fn download_model() -> reqwest::Result<Bytes> {
-        reqwest::blocking::get("https://github.com/onnx/models/raw/master/vision/classification/mobilenet/model/mobilenetv2-7.onnx")
-        .unwrap().bytes()
+        #[cfg(not(target_arch = "wasm32"))]
+        return reqwest::blocking::get("https://github.com/onnx/models/raw/master/vision/classification/mobilenet/model/mobilenetv2-7.onnx")
+        .unwrap().bytes();
+    }
+
+    #[cfg(target_arch = "wasm32")]
+    pub async fn download_model() -> reqwest::Result<Bytes> {
+        return reqwest::get("https://github.com/onnx/models/raw/master/vision/classification/mobilenet/model/mobilenetv2-7.onnx").await
+        .unwrap().bytes().await;
     }
 
     pub fn labels() -> Vec<String> {
@@ -35,11 +43,16 @@ impl MobileNet {
             .collect();
         collect
     }
-}
 
-impl Default for MobileNet {
-    fn default() -> Self {
+    pub async fn init(&mut self) {
+        #[cfg(target_arch = "wasm32")]
+        let data = Self::download_model().await.unwrap();
+        #[cfg(not(target_arch = "wasm32"))]
         let data = Self::download_model().unwrap();
+        self.init_model(data);
+    }
+
+    pub fn init_model(&mut self, data: Bytes) {
         let mut cursor = Cursor::new(data);
         let model = tract_onnx::onnx()
             .model_for_read(&mut cursor)
@@ -53,8 +66,20 @@ impl Default for MobileNet {
             .unwrap()
             .into_runnable()
             .unwrap();
+        self.model = Some(model);
+    }
+}
 
-        MobileNet { model }
+impl Default for MobileNet {
+    fn default() -> Self {
+        let mut mobile_net = MobileNet { model: None };
+
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            let data = Self::download_model().unwrap();
+            mobile_net.init_model(data);
+        }
+        mobile_net
     }
 }
 
@@ -78,14 +103,19 @@ impl ImageProcessor for MobileNet {
             })
             .into();
 
-        let result = self.model.run(tvec!(tensor))?;
-        let best = result[0]
-            .to_array_view::<f32>()?
-            .iter()
-            .cloned()
-            .zip(1..)
-            .max_by(|a, b| a.0.partial_cmp(&b.0).unwrap());
-        let index = best.unwrap().1;
+        let index = match &self.model {
+            Some(model) => {
+                let result = model.run(tvec!(tensor)).unwrap();
+                let best = result[0]
+                    .to_array_view::<f32>()?
+                    .iter()
+                    .cloned()
+                    .zip(1..)
+                    .max_by(|a, b| a.0.partial_cmp(&b.0).unwrap());
+                best.unwrap().1
+            }
+            None => 0,
+        };
         let label = Self::labels()[index].to_string();
         println!("{}", label);
 
@@ -93,13 +123,21 @@ impl ImageProcessor for MobileNet {
 
         let font = Vec::from(include_bytes!("../assets/DejaVuSans.ttf") as &[u8]);
         let font = Font::try_from_vec(font).unwrap();
-    
+
         let height = 12.4;
         let scale = Scale {
             x: height * 2.0,
             y: height,
         };
-        draw_text_mut(&mut img, Rgba([0u8, 0u8, 0u8, 255u8]), 0, 0, scale, &font, &label);
+        draw_text_mut(
+            &mut img,
+            Rgba([0u8, 0u8, 0u8, 255u8]),
+            0,
+            0,
+            scale,
+            &font,
+            &label,
+        );
         *image = Box::new(img);
         Ok(())
     }
@@ -147,6 +185,11 @@ impl Processor for MobileNet {
         serde_json::to_value(Config::default()).unwrap()
     }
 }
+
+#[cfg(target_arch = "wasm32")]
+use wasm_bindgen::prelude::*;
+#[cfg(target_arch = "wasm32")]
+lenna_core::export_wasm_plugin!(MobileNet);
 
 #[cfg(test)]
 mod tests {
