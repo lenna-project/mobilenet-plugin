@@ -1,22 +1,90 @@
+use bytes::Bytes;
 use image::DynamicImage;
 use lenna_core::plugins::PluginRegistrar;
 use lenna_core::ProcessorConfig;
 use lenna_core::{core::processor::ExifProcessor, core::processor::ImageProcessor, Processor};
+use std::io::Cursor;
+use tract_onnx::prelude::*;
 
 extern "C" fn register(registrar: &mut dyn PluginRegistrar) {
-    registrar.add_plugin(Box::new(MobileNet {}));
+    registrar.add_plugin(Box::new(MobileNet::default()));
 }
 
 lenna_core::export_plugin!(register);
 
-#[derive(Default, Clone)]
-pub struct MobileNet;
+type ModelType = SimplePlan<TypedFact, Box<dyn TypedOp>, Graph<TypedFact, Box<dyn TypedOp>>>;
+
+#[derive(Clone)]
+pub struct MobileNet {
+    model: ModelType,
+}
+
+impl MobileNet {
+    pub fn download_model() -> reqwest::Result<Bytes> {
+        reqwest::blocking::get("https://github.com/onnx/models/raw/master/vision/classification/mobilenet/model/mobilenetv2-7.onnx")
+        .unwrap().bytes()
+    }
+
+    pub fn labels() -> Vec<String> {
+        let collect = include_str!("../assets/imagenet_slim_labels.txt")
+            .to_string()
+            .lines()
+            .map(|s| s.to_string())
+            .collect();
+        collect
+    }
+}
+
+impl Default for MobileNet {
+    fn default() -> Self {
+        let data = Self::download_model().unwrap();
+        let mut cursor = Cursor::new(data);
+        let model = tract_onnx::onnx()
+            .model_for_read(&mut cursor)
+            .unwrap()
+            .with_input_fact(
+                0,
+                InferenceFact::dt_shape(f32::datum_type(), tvec!(1, 3, 224, 224)),
+            )
+            .unwrap()
+            .into_optimized()
+            .unwrap()
+            .into_runnable()
+            .unwrap();
+
+        MobileNet { model }
+    }
+}
 
 impl ImageProcessor for MobileNet {
     fn process_image(
         &self,
         _image: &mut Box<DynamicImage>,
     ) -> Result<(), Box<dyn std::error::Error>> {
+        let image_rgb = _image.to_rgb8();
+        let resized = image::imageops::resize(
+            &image_rgb,
+            224,
+            224,
+            ::image::imageops::FilterType::Triangle,
+        );
+        let image: Tensor =
+            tract_ndarray::Array4::from_shape_fn((1, 3, 224, 224), |(_, c, y, x)| {
+                let mean = [0.485, 0.456, 0.406][c];
+                let std = [0.229, 0.224, 0.225][c];
+                (resized[(x as _, y as _)][c] as f32 / 255.0 - mean) / std
+            })
+            .into();
+
+        let result = self.model.run(tvec!(image))?;
+        let best = result[0]
+            .to_array_view::<f32>()?
+            .iter()
+            .cloned()
+            .zip(1..)
+            .max_by(|a, b| a.0.partial_cmp(&b.0).unwrap());
+        let index = best.unwrap().1;
+        println!("{}", Self::labels()[index]);
         Ok(())
     }
 }
