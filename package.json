@@ -1,5 +1,5 @@
 {
-  "name": "@lenna-project/text",
+  "name": "@lenna-project/mobilenet",
   "version": "0.1.0",
   "description": "",
   "scripts": {
@@ -9,8 +9,8 @@
     "clean": "rm -rf dist"
   },
   "config": {
-    "shortname": "text",
-    "publicPath": "https://lenna.app/lenna-plugins-extra/text/"
+    "shortname": "mobilenet",
+    "publicPath": "https://lenna.app/mobilenet-plugin/"
   },
   "keywords": [],
   "author": "",
