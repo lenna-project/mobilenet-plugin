@@ -169,6 +169,14 @@ use wasm_bindgen::prelude::*;
 #[cfg(target_arch = "wasm32")]
 lenna_core::export_wasm_plugin!(MobileNet);
 
+#[cfg(feature = "python")]
+use pyo3::prelude::*;
+#[cfg(feature = "python")]
+#[allow(non_camel_case_types)]
+type lenna_mobilenet_plugin = MobileNet;
+#[cfg(feature = "python")]
+lenna_core::export_python_plugin!(lenna_mobilenet_plugin);
+
 #[cfg(test)]
 mod tests {
     use super::*;
