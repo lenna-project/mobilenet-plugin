@@ -17,6 +17,7 @@ type ModelType = SimplePlan<TypedFact, Box<dyn TypedOp>, Graph<TypedFact, Box<dy
 
 #[derive(Clone)]
 pub struct MobileNet {
+    config: Config,
     model: ModelType,
 }
 
@@ -52,6 +53,7 @@ impl MobileNet {
 impl Default for MobileNet {
     fn default() -> Self {
         MobileNet {
+            config: Config::default(),
             model: Self::model(),
         }
     }
@@ -93,7 +95,7 @@ impl ImageProcessor for MobileNet {
         let font = Vec::from(include_bytes!("../assets/DejaVuSans.ttf") as &[u8]);
         let font = Font::try_from_vec(font).unwrap();
 
-        let height = 12.4;
+        let height = self.config.size;
         let scale = Scale {
             x: height * 2.0,
             y: height,
@@ -101,8 +103,8 @@ impl ImageProcessor for MobileNet {
         draw_text_mut(
             &mut img,
             Rgba([0u8, 0u8, 0u8, 255u8]),
-            0,
-            0,
+            self.config.x,
+            self.config.y,
             scale,
             &font,
             &label,
@@ -115,11 +117,17 @@ impl ImageProcessor for MobileNet {
 impl ExifProcessor for MobileNet {}
 
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
-struct Config {}
+struct Config {
+    x: u32,
+    y: u32,
+    size: f32
+}
 
 impl Default for Config {
     fn default() -> Self {
-        Config {}
+        Config {
+            x: 0, y: 0, size: 12.5
+        }
     }
 }
 
@@ -142,9 +150,10 @@ impl Processor for MobileNet {
 
     fn process(
         &mut self,
-        _config: ProcessorConfig,
+        config: ProcessorConfig,
         image: &mut Box<lenna_core::LennaImage>,
     ) -> Result<(), Box<dyn std::error::Error>> {
+        self.config = serde_json::from_value(config.config).unwrap();
         self.process_exif(&mut image.exif).unwrap();
         self.process_image(&mut image.image).unwrap();
         Ok(())
@@ -168,9 +177,13 @@ mod tests {
     #[test]
     fn default() {
         let mut mobilenet = MobileNet::default();
+        let mut c = mobilenet.default_config();
+        c["x"] = serde_json::json!(10);
+        c["y"] = serde_json::json!(30);
+        c["size"] = serde_json::json!(42);
         let config = ProcessorConfig {
             id: "mobilenet".into(),
-            config: mobilenet.default_config(),
+            config: c,
         };
         assert_eq!(mobilenet.name(), "mobilenet");
         let mut img =

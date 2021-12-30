@@ -40,8 +40,7 @@ module.exports = (env = {}) => ({
         test: /\.css$/,
         use: [
           {
-            loader: MiniCssExtractPlugin.loader,
-            options: { hmr: !env.prod },
+            loader: MiniCssExtractPlugin.loader
           },
           "css-loader",
         ],
@@ -61,6 +60,7 @@ module.exports = (env = {}) => ({
       },
       exposes: {
         "default": "./src/",
+        "./Widget": "./src/Widget",
       },
       remotes: {},
       shared: ['vue']
