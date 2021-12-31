@@ -39,8 +39,8 @@ __webpack_require__.d(__webpack_exports__, {
   "default": () => (/* binding */ Widget)
 });
 
-// EXTERNAL MODULE: consume shared module (default) vue@^3.0.11 (strict) (fallback: ./node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js)
-var runtime_dom_esm_bundler_js_ = __webpack_require__(748);
+// EXTERNAL MODULE: consume shared module (default) vue@^3.2 (strict) (fallback: ./node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js)
+var runtime_dom_esm_bundler_js_ = __webpack_require__(617);
 ;// CONCATENATED MODULE: ./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[1]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./src/Widget.vue?vue&type=template&id=a77c06c8&scoped=true
 
 

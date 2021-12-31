@@ -35,8 +35,8 @@ exports.Z = (sfc, props) => {
 
 // UNUSED EXPORTS: default
 
-// EXTERNAL MODULE: consume shared module (default) vue@^3.0.11 (strict) (fallback: ./node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js)
-var runtime_dom_esm_bundler_js_ = __webpack_require__(748);
+// EXTERNAL MODULE: consume shared module (default) vue@^3.2 (strict) (fallback: ./node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js)
+var runtime_dom_esm_bundler_js_ = __webpack_require__(617);
 ;// CONCATENATED MODULE: ./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[1]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./src/Widget.vue?vue&type=template&id=a77c06c8&scoped=true
 
 
@@ -518,9 +518,9 @@ const defaultConfig = async () => {
 /******/ 		});
 /******/ 		var installedModules = {};
 /******/ 		var moduleToHandlerMapping = {
-/******/ 			748: () => (loadStrictVersionCheckFallback("default", "vue", [1,3,0,11], () => (__webpack_require__.e(594).then(() => (() => (__webpack_require__(594)))))))
+/******/ 			617: () => (loadStrictVersionCheckFallback("default", "vue", [1,3,2], () => (__webpack_require__.e(594).then(() => (() => (__webpack_require__(594)))))))
 /******/ 		};
-/******/ 		var initialConsumes = [748];
+/******/ 		var initialConsumes = [617];
 /******/ 		initialConsumes.forEach((id) => {
 /******/ 			__webpack_require__.m[id] = (module) => {
 /******/ 				// Handle case when module is used sync
@@ -572,7 +572,7 @@ const defaultConfig = async () => {
 /******/ 			179: 0,
 /******/ 			138: 0,
 /******/ 			895: 0,
-/******/ 			748: 0
+/******/ 			617: 0
 /******/ 		};
 /******/ 		
 /******/ 		__webpack_require__.f.j = (chunkId, promises) => {
