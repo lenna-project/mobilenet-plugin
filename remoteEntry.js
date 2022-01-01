@@ -10,7 +10,7 @@ var moduleMap = {
 		return Promise.all([__webpack_require__.e(617), __webpack_require__.e(138)]).then(() => (() => ((__webpack_require__(138)))));
 	},
 	"./Widget": () => {
-		return Promise.all([__webpack_require__.e(617), __webpack_require__.e(315)]).then(() => (() => ((__webpack_require__(315)))));
+		return Promise.all([__webpack_require__.e(617), __webpack_require__.e(264)]).then(() => (() => ((__webpack_require__(264)))));
 	}
 };
 var get = (module, getScope) => {
@@ -584,7 +584,7 @@ __webpack_require__.d(exports, {
 /******/ 					promises.push(installedWasmModuleData);
 /******/ 				else {
 /******/ 					var importObject = wasmImportObjects[wasmModuleId]();
-/******/ 					var req = fetch(__webpack_require__.p + "" + {"199":{"652":"0dc001f7d8ad9bd98cca"}}[chunkId][wasmModuleId] + ".module.wasm");
+/******/ 					var req = fetch(__webpack_require__.p + "" + {"199":{"652":"cb2432b9dc9f2c809ea4"}}[chunkId][wasmModuleId] + ".module.wasm");
 /******/ 					var promise;
 /******/ 					if(importObject && typeof importObject.then === 'function' && typeof WebAssembly.compileStreaming === 'function') {
 /******/ 						promise = Promise.all([WebAssembly.compileStreaming(req), importObject]).then(function(items) {

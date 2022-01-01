@@ -1,13 +1,13 @@
-(self["webpackChunk_lenna_project_mobilenet"] = self["webpackChunk_lenna_project_mobilenet"] || []).push([[138,315],{
+(self["webpackChunk_lenna_project_mobilenet"] = self["webpackChunk_lenna_project_mobilenet"] || []).push([[138,264],{
 
-/***/ 509:
+/***/ 979:
 /***/ ((module, exports, __webpack_require__) => {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(645);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, "\n.plugin-config[data-v-2cf59766] {\n  margin: 5px;\n}\n", ""]);
+exports.push([module.id, "\n.plugin-config[data-v-8872bee2] {\n  margin: 5px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -135,7 +135,7 @@ exports.Z = (sfc, props) => {
 
 /***/ }),
 
-/***/ 315:
+/***/ 264:
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -149,24 +149,44 @@ __webpack_require__.d(__webpack_exports__, {
 
 // EXTERNAL MODULE: consume shared module (default) vue@^3.2 (strict) (fallback: ./node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js)
 var runtime_dom_esm_bundler_js_ = __webpack_require__(617);
-;// CONCATENATED MODULE: ./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[1]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./src/Widget.vue?vue&type=template&id=2cf59766&scoped=true
+;// CONCATENATED MODULE: ./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[1]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./src/Widget.vue?vue&type=template&id=8872bee2&scoped=true
 
 
-const _withScopeId = n => ((0,runtime_dom_esm_bundler_js_.pushScopeId)("data-v-2cf59766"),n=n(),(0,runtime_dom_esm_bundler_js_.popScopeId)(),n)
+const _withScopeId = n => ((0,runtime_dom_esm_bundler_js_.pushScopeId)("data-v-8872bee2"),n=n(),(0,runtime_dom_esm_bundler_js_.popScopeId)(),n)
 const _hoisted_1 = { class: "plugin-config" }
-const _hoisted_2 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/(0,runtime_dom_esm_bundler_js_.createElementVNode)("label", null, "x: ", -1))
-const _hoisted_3 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/(0,runtime_dom_esm_bundler_js_.createElementVNode)("label", null, "y: ", -1))
-const _hoisted_4 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/(0,runtime_dom_esm_bundler_js_.createElementVNode)("label", null, "size: ", -1))
+const _hoisted_2 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/(0,runtime_dom_esm_bundler_js_.createElementVNode)("label", { for: "print" }, "print label to image", -1))
+const _hoisted_3 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/(0,runtime_dom_esm_bundler_js_.createElementVNode)("label", { for: "exif" }, "add label to exif data", -1))
+const _hoisted_4 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/(0,runtime_dom_esm_bundler_js_.createElementVNode)("label", null, "x: ", -1))
+const _hoisted_5 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/(0,runtime_dom_esm_bundler_js_.createElementVNode)("label", null, "y: ", -1))
+const _hoisted_6 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/(0,runtime_dom_esm_bundler_js_.createElementVNode)("label", null, "size: ", -1))
 
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   return ((0,runtime_dom_esm_bundler_js_.openBlock)(), (0,runtime_dom_esm_bundler_js_.createElementBlock)("div", _hoisted_1, [
     (0,runtime_dom_esm_bundler_js_.createElementVNode)("div", null, [
+      (0,runtime_dom_esm_bundler_js_.withDirectives)((0,runtime_dom_esm_bundler_js_.createElementVNode)("input", {
+        type: "checkbox",
+        id: "print",
+        "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((_ctx.print) = $event)),
+        onChange: _cache[1] || (_cache[1] = $event => (_ctx.updateConfig()))
+      }, null, 544), [
+        [runtime_dom_esm_bundler_js_.vModelCheckbox, _ctx.print]
+      ]),
       _hoisted_2,
+      (0,runtime_dom_esm_bundler_js_.withDirectives)((0,runtime_dom_esm_bundler_js_.createElementVNode)("input", {
+        type: "checkbox",
+        id: "exif",
+        "onUpdate:modelValue": _cache[2] || (_cache[2] = $event => ((_ctx.exif) = $event)),
+        onChange: _cache[3] || (_cache[3] = $event => (_ctx.updateConfig()))
+      }, null, 544), [
+        [runtime_dom_esm_bundler_js_.vModelCheckbox, _ctx.exif]
+      ]),
+      _hoisted_3,
+      _hoisted_4,
       (0,runtime_dom_esm_bundler_js_.withDirectives)((0,runtime_dom_esm_bundler_js_.createElementVNode)("input", {
         type: "number",
         width: "5ch",
-        "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((_ctx.x) = $event)),
-        onChange: _cache[1] || (_cache[1] = $event => (_ctx.updateConfig()))
+        "onUpdate:modelValue": _cache[4] || (_cache[4] = $event => ((_ctx.x) = $event)),
+        onChange: _cache[5] || (_cache[5] = $event => (_ctx.updateConfig()))
       }, null, 544), [
         [
           runtime_dom_esm_bundler_js_.vModelText,
@@ -175,12 +195,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           { number: true }
         ]
       ]),
-      _hoisted_3,
+      _hoisted_5,
       (0,runtime_dom_esm_bundler_js_.withDirectives)((0,runtime_dom_esm_bundler_js_.createElementVNode)("input", {
         type: "number",
         width: "5ch",
-        "onUpdate:modelValue": _cache[2] || (_cache[2] = $event => ((_ctx.y) = $event)),
-        onChange: _cache[3] || (_cache[3] = $event => (_ctx.updateConfig()))
+        "onUpdate:modelValue": _cache[6] || (_cache[6] = $event => ((_ctx.y) = $event)),
+        onChange: _cache[7] || (_cache[7] = $event => (_ctx.updateConfig()))
       }, null, 544), [
         [
           runtime_dom_esm_bundler_js_.vModelText,
@@ -189,12 +209,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
           { number: true }
         ]
       ]),
-      _hoisted_4,
+      _hoisted_6,
       (0,runtime_dom_esm_bundler_js_.withDirectives)((0,runtime_dom_esm_bundler_js_.createElementVNode)("input", {
         type: "number",
         width: "10ch",
-        "onUpdate:modelValue": _cache[4] || (_cache[4] = $event => ((_ctx.size) = $event)),
-        onChange: _cache[5] || (_cache[5] = $event => (_ctx.updateConfig()))
+        "onUpdate:modelValue": _cache[8] || (_cache[8] = $event => ((_ctx.size) = $event)),
+        onChange: _cache[9] || (_cache[9] = $event => (_ctx.updateConfig()))
       }, null, 544), [
         [
           runtime_dom_esm_bundler_js_.vModelText,
@@ -206,7 +226,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]))
 }
-;// CONCATENATED MODULE: ./src/Widget.vue?vue&type=template&id=2cf59766&scoped=true
+;// CONCATENATED MODULE: ./src/Widget.vue?vue&type=template&id=8872bee2&scoped=true
 
 ;// CONCATENATED MODULE: ./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./src/Widget.vue?vue&type=script&lang=js
 
@@ -220,7 +240,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     return {
       x: 0,
       y: 0,
-      size: 12.5
+      size: 12.5,
+      print: true,
+      exif: false
     };
   },
   methods: {
@@ -228,7 +250,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       let config = {
         x: this.x,
         y: this.y,
-        size: this.size
+        size: this.size,
+        print: this.print,
+        exif: this.exif,
       };
       this.$emit("changeConfig", config);
     },
@@ -237,15 +261,17 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     this.x = this.defaultConfig.x;
     this.y = this.defaultConfig.y;
     this.size = this.defaultConfig.size;
+    this.print = this.defaultConfig.print;
+    this.exif = this.defaultConfig.exif;
     this.updateConfig();
   },
 }));
 
 ;// CONCATENATED MODULE: ./src/Widget.vue?vue&type=script&lang=js
  
-// EXTERNAL MODULE: ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./src/Widget.vue?vue&type=style&index=0&id=2cf59766&scoped=true&lang=css
-var Widgetvue_type_style_index_0_id_2cf59766_scoped_true_lang_css = __webpack_require__(509);
-;// CONCATENATED MODULE: ./src/Widget.vue?vue&type=style&index=0&id=2cf59766&scoped=true&lang=css
+// EXTERNAL MODULE: ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./src/Widget.vue?vue&type=style&index=0&id=8872bee2&scoped=true&lang=css
+var Widgetvue_type_style_index_0_id_8872bee2_scoped_true_lang_css = __webpack_require__(979);
+;// CONCATENATED MODULE: ./src/Widget.vue?vue&type=style&index=0&id=8872bee2&scoped=true&lang=css
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/dist/exportHelper.js
 var exportHelper = __webpack_require__(744);
@@ -257,7 +283,7 @@ var exportHelper = __webpack_require__(744);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.Z)(Widgetvue_type_script_lang_js, [['render',render],['__scopeId',"data-v-2cf59766"]])
+const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.Z)(Widgetvue_type_script_lang_js, [['render',render],['__scopeId',"data-v-8872bee2"]])
 
 /* harmony default export */ const Widget = (__exports__);
 
@@ -276,7 +302,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "process": () => (/* binding */ process),
 /* harmony export */   "defaultConfig": () => (/* binding */ defaultConfig)
 /* harmony export */ });
-/* harmony import */ var _Widget__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(315);
+/* harmony import */ var _Widget__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(264);
 const pkg = __webpack_require__.e(/* import() */ 199).then(__webpack_require__.bind(__webpack_require__, 199));
 
 
@@ -288,7 +314,7 @@ const process = async (config, image) => {
   return __webpack_require__.e(/* import() */ 199).then(__webpack_require__.bind(__webpack_require__, 199)).then((processor) => processor.process(config, image));
 };
 const defaultConfig = async () => {
-  return { x: 0, y: 0, size: 12.5 };
+  return { x: 0, y: 0, size: 12.5, print: true, exif: false };
 };
 
 
