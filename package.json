@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "",
   "scripts": {
-    "start": "webpack-cli serve",
+    "start": "webpack-cli serve --env prod=false",
     "serve": "serve dist -p 3002 --cors",
     "build": "webpack --mode production --env prod=true",
     "clean": "rm -rf dist"

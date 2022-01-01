@@ -2,11 +2,11 @@
   <div class="plugin-config">
     <div>
       <label>x: </label>
-      <input type="number" v-model.number="x" @change="updateConfig()" />
+      <input type="number" width="5ch" v-model.number="x" @change="updateConfig()" />
       <label>y: </label>
-      <input type="number" v-model.number="y" @change="updateConfig()" />
+      <input type="number" width="5ch" v-model.number="y" @change="updateConfig()" />
       <label>size: </label>
-      <input type="number" v-model.number="size" @change="updateConfig()" />
+      <input type="number" width="10ch" v-model.number="size" @change="updateConfig()" />
     </div>
   </div>
 </template>
