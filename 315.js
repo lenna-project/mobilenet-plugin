@@ -1,4 +1,4 @@
-(self["webpackChunk_lenna_project_mobilenet"] = self["webpackChunk_lenna_project_mobilenet"] || []).push([[138,315],{
+(self["webpackChunk_lenna_project_mobilenet"] = self["webpackChunk_lenna_project_mobilenet"] || []).push([[315],{
 
 /***/ 509:
 /***/ ((module, exports, __webpack_require__) => {
@@ -261,38 +261,7 @@ const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.Z)(Widgetvue_type_
 
 /* harmony default export */ const Widget = (__exports__);
 
-/***/ }),
-
-/***/ 138:
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   "ui": () => (/* binding */ ui),
-/* harmony export */   "processor": () => (/* binding */ processor),
-/* harmony export */   "name": () => (/* binding */ name),
-/* harmony export */   "description": () => (/* binding */ description),
-/* harmony export */   "process": () => (/* binding */ process),
-/* harmony export */   "defaultConfig": () => (/* binding */ defaultConfig)
-/* harmony export */ });
-/* harmony import */ var _Widget__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(315);
-const pkg = __webpack_require__.e(/* import() */ 199).then(__webpack_require__.bind(__webpack_require__, 199));
-
-
-const ui = _Widget__WEBPACK_IMPORTED_MODULE_0__["default"];
-const processor = pkg;
-const name = () => "mobilenet";
-const description = () => "Plugin to label images.";
-const process = async (config, image) => {
-  return __webpack_require__.e(/* import() */ 199).then(__webpack_require__.bind(__webpack_require__, 199)).then((processor) => processor.process(config, image));
-};
-const defaultConfig = async () => {
-  return { x: 0, y: 0, size: 12.5 };
-};
-
-
 /***/ })
 
 }]);
-//# sourceMappingURL=138.js.map
+//# sourceMappingURL=315.js.map

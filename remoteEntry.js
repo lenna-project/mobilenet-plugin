@@ -10,7 +10,7 @@ var moduleMap = {
 		return Promise.all([__webpack_require__.e(617), __webpack_require__.e(138)]).then(() => (() => ((__webpack_require__(138)))));
 	},
 	"./Widget": () => {
-		return Promise.all([__webpack_require__.e(617), __webpack_require__.e(602)]).then(() => (() => ((__webpack_require__(602)))));
+		return Promise.all([__webpack_require__.e(617), __webpack_require__.e(315)]).then(() => (() => ((__webpack_require__(315)))));
 	}
 };
 var get = (module, getScope) => {

@@ -1,14 +1,14 @@
 /******/ (() => { // webpackBootstrap
 /******/ 	var __webpack_modules__ = ({
 
-/***/ 693:
+/***/ 509:
 /***/ ((module, exports, __webpack_require__) => {
 
 // Imports
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(645);
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.id, "\n.plugin-config[data-v-a77c06c8] {\n  margin: 5px;\n}\n", ""]);
+exports.push([module.id, "\n.plugin-config[data-v-2cf59766] {\n  margin: 5px;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -136,7 +136,7 @@ exports.Z = (sfc, props) => {
 
 /***/ }),
 
-/***/ 602:
+/***/ 315:
 /***/ ((__unused_webpack_module, __unused_webpack___webpack_exports__, __webpack_require__) => {
 
 "use strict";
@@ -145,10 +145,10 @@ exports.Z = (sfc, props) => {
 
 // EXTERNAL MODULE: consume shared module (default) vue@^3.2 (strict) (fallback: ./node_modules/@vue/runtime-dom/dist/runtime-dom.esm-bundler.js)
 var runtime_dom_esm_bundler_js_ = __webpack_require__(617);
-;// CONCATENATED MODULE: ./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[1]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./src/Widget.vue?vue&type=template&id=a77c06c8&scoped=true
+;// CONCATENATED MODULE: ./node_modules/vue-loader/dist/templateLoader.js??ruleSet[1].rules[1]!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./src/Widget.vue?vue&type=template&id=2cf59766&scoped=true
 
 
-const _withScopeId = n => ((0,runtime_dom_esm_bundler_js_.pushScopeId)("data-v-a77c06c8"),n=n(),(0,runtime_dom_esm_bundler_js_.popScopeId)(),n)
+const _withScopeId = n => ((0,runtime_dom_esm_bundler_js_.pushScopeId)("data-v-2cf59766"),n=n(),(0,runtime_dom_esm_bundler_js_.popScopeId)(),n)
 const _hoisted_1 = { class: "plugin-config" }
 const _hoisted_2 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/(0,runtime_dom_esm_bundler_js_.createElementVNode)("label", null, "x: ", -1))
 const _hoisted_3 = /*#__PURE__*/ _withScopeId(() => /*#__PURE__*/(0,runtime_dom_esm_bundler_js_.createElementVNode)("label", null, "y: ", -1))
@@ -160,6 +160,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       _hoisted_2,
       (0,runtime_dom_esm_bundler_js_.withDirectives)((0,runtime_dom_esm_bundler_js_.createElementVNode)("input", {
         type: "number",
+        width: "5ch",
         "onUpdate:modelValue": _cache[0] || (_cache[0] = $event => ((_ctx.x) = $event)),
         onChange: _cache[1] || (_cache[1] = $event => (_ctx.updateConfig()))
       }, null, 544), [
@@ -173,6 +174,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       _hoisted_3,
       (0,runtime_dom_esm_bundler_js_.withDirectives)((0,runtime_dom_esm_bundler_js_.createElementVNode)("input", {
         type: "number",
+        width: "5ch",
         "onUpdate:modelValue": _cache[2] || (_cache[2] = $event => ((_ctx.y) = $event)),
         onChange: _cache[3] || (_cache[3] = $event => (_ctx.updateConfig()))
       }, null, 544), [
@@ -186,6 +188,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
       _hoisted_4,
       (0,runtime_dom_esm_bundler_js_.withDirectives)((0,runtime_dom_esm_bundler_js_.createElementVNode)("input", {
         type: "number",
+        width: "10ch",
         "onUpdate:modelValue": _cache[4] || (_cache[4] = $event => ((_ctx.size) = $event)),
         onChange: _cache[5] || (_cache[5] = $event => (_ctx.updateConfig()))
       }, null, 544), [
@@ -199,7 +202,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     ])
   ]))
 }
-;// CONCATENATED MODULE: ./src/Widget.vue?vue&type=template&id=a77c06c8&scoped=true
+;// CONCATENATED MODULE: ./src/Widget.vue?vue&type=template&id=2cf59766&scoped=true
 
 ;// CONCATENATED MODULE: ./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./src/Widget.vue?vue&type=script&lang=js
 
@@ -236,9 +239,9 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
 
 ;// CONCATENATED MODULE: ./src/Widget.vue?vue&type=script&lang=js
  
-// EXTERNAL MODULE: ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./src/Widget.vue?vue&type=style&index=0&id=a77c06c8&scoped=true&lang=css
-var Widgetvue_type_style_index_0_id_a77c06c8_scoped_true_lang_css = __webpack_require__(693);
-;// CONCATENATED MODULE: ./src/Widget.vue?vue&type=style&index=0&id=a77c06c8&scoped=true&lang=css
+// EXTERNAL MODULE: ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/dist/stylePostLoader.js!./node_modules/vue-loader/dist/index.js??ruleSet[1].rules[4].use[0]!./src/Widget.vue?vue&type=style&index=0&id=2cf59766&scoped=true&lang=css
+var Widgetvue_type_style_index_0_id_2cf59766_scoped_true_lang_css = __webpack_require__(509);
+;// CONCATENATED MODULE: ./src/Widget.vue?vue&type=style&index=0&id=2cf59766&scoped=true&lang=css
 
 // EXTERNAL MODULE: ./node_modules/vue-loader/dist/exportHelper.js
 var exportHelper = __webpack_require__(744);
@@ -250,7 +253,7 @@ var exportHelper = __webpack_require__(744);
 ;
 
 
-const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.Z)(Widgetvue_type_script_lang_js, [['render',render],['__scopeId',"data-v-a77c06c8"]])
+const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.Z)(Widgetvue_type_script_lang_js, [['render',render],['__scopeId',"data-v-2cf59766"]])
 
 /* harmony default export */ const Widget = ((/* unused pure expression or super */ null && (__exports__)));
 
@@ -261,7 +264,7 @@ const __exports__ = /*#__PURE__*/(0,exportHelper/* default */.Z)(Widgetvue_type_
 
 "use strict";
 /* unused harmony exports ui, processor, name, description, process, defaultConfig */
-/* harmony import */ var _Widget__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(602);
+/* harmony import */ var _Widget__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(315);
 const pkg = __webpack_require__.e(/* import() */ 199).then(__webpack_require__.bind(__webpack_require__, 199));
 
 
@@ -679,7 +682,7 @@ const defaultConfig = async () => {
 /******/ 		var installedChunks = {
 /******/ 			179: 0,
 /******/ 			138: 0,
-/******/ 			602: 0,
+/******/ 			315: 0,
 /******/ 			617: 0
 /******/ 		};
 /******/ 		
