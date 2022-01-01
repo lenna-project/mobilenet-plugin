@@ -4,7 +4,7 @@
   "description": "",
   "scripts": {
     "start": "webpack-cli serve",
-    "serve": "serve dist -p 3002",
+    "serve": "serve dist -p 3002 --cors",
     "build": "webpack --mode production --env prod=true",
     "clean": "rm -rf dist"
   },
@@ -16,7 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@babel/core": "^7.11.0",
+    "@babel/core": "^7.16.7",
     "babel-loader": "^8.1.0",
     "serve": "^13.0.2",
     "vue": "^3.2"
@@ -26,7 +26,6 @@
     "css-loader": "^3.6.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.3.1",
-    "mini-css-extract-plugin": "^0.9.0",
     "url-loader": "^4.1.1",
     "vue-loader": "^16.2.0",
     "webpack": "^5.33.2",

@@ -1,6 +1,5 @@
 const path = require("path");
 const { VueLoaderPlugin } = require("vue-loader");
-const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const { ModuleFederationPlugin } = require("webpack").container;
 const pkg = require("./package.json");
 
@@ -15,7 +14,7 @@ module.exports = (env = {}) => ({
   target: "web",
   entry: path.resolve(__dirname, "./src/index.js"),
   output: {
-    publicPath: !env.prod? "http://localhost:3002/": pkg.config.publicPath,
+    publicPath: !env.prod ? "http://localhost:3002/" : pkg.config.publicPath,
   },
   resolve: {
     extensions: [".vue", ".jsx", ".js", ".json"],
@@ -38,19 +37,11 @@ module.exports = (env = {}) => ({
       },
       {
         test: /\.css$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader
-          },
-          "css-loader",
-        ],
+        use: ["css-loader"],
       },
     ],
   },
   plugins: [
-    new MiniCssExtractPlugin({
-      filename: "[name].css",
-    }),
     new ModuleFederationPlugin({
       name: pkg.config.shortname,
       library: { type: "amd", name: pkg.config.shortname },
@@ -59,11 +50,11 @@ module.exports = (env = {}) => ({
         "lenna-web": "lenna-web",
       },
       exposes: {
-        "default": "./src/",
+        default: "./src/",
         "./Widget": "./src/Widget",
       },
       remotes: {},
-      shared: ['vue']
+      shared: ["vue"],
     }),
     new VueLoaderPlugin(),
   ],
@@ -71,7 +62,9 @@ module.exports = (env = {}) => ({
     syncWebAssembly: true,
   },
   devServer: {
-    contentBase: path.join(__dirname),
+    static: {
+      directory: path.join(__dirname),
+    },
     compress: true,
     port: 3002,
     hot: true,
