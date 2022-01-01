@@ -10,7 +10,7 @@ var moduleMap = {
 		return Promise.all([__webpack_require__.e(617), __webpack_require__.e(138)]).then(() => (() => ((__webpack_require__(138)))));
 	},
 	"./Widget": () => {
-		return Promise.all([__webpack_require__.e(617), __webpack_require__.e(895)]).then(() => (() => ((__webpack_require__(895)))));
+		return Promise.all([__webpack_require__.e(617), __webpack_require__.e(602)]).then(() => (() => ((__webpack_require__(602)))));
 	}
 };
 var get = (module, getScope) => {
@@ -253,58 +253,6 @@ __webpack_require__.d(exports, {
 /******/ 	(() => {
 /******/ 		__webpack_require__.p = "https://lenna.app/mobilenet-plugin/";
 /******/ 	})();
-/******/ 	
-/******/ 	/* webpack/runtime/compat */
-/******/ 	
-/******/ 	
-/******/ 	// object to store loaded CSS chunks
-/******/ 	var installedCssChunks = {
-/******/ 		216: 0
-/******/ 	}
-/******/ 	__webpack_require__.f.compat = (chunkId, promises) => {
-/******/ 	
-/******/ 	
-/******/ 		// mini-css-extract-plugin CSS loading
-/******/ 		var cssChunks = {"138":1,"895":1};
-/******/ 		if(installedCssChunks[chunkId]) promises.push(installedCssChunks[chunkId]);
-/******/ 		else if(installedCssChunks[chunkId] !== 0 && cssChunks[chunkId]) {
-/******/ 			promises.push(installedCssChunks[chunkId] = new Promise(function(resolve, reject) {
-/******/ 				var href = "" + ({}[chunkId]||chunkId) + ".css";
-/******/ 				var fullhref = __webpack_require__.p + href;
-/******/ 				var existingLinkTags = document.getElementsByTagName("link");
-/******/ 				for(var i = 0; i < existingLinkTags.length; i++) {
-/******/ 					var tag = existingLinkTags[i];
-/******/ 					var dataHref = tag.getAttribute("data-href") || tag.getAttribute("href");
-/******/ 					if(tag.rel === "stylesheet" && (dataHref === href || dataHref === fullhref)) return resolve();
-/******/ 				}
-/******/ 				var existingStyleTags = document.getElementsByTagName("style");
-/******/ 				for(var i = 0; i < existingStyleTags.length; i++) {
-/******/ 					var tag = existingStyleTags[i];
-/******/ 					var dataHref = tag.getAttribute("data-href");
-/******/ 					if(dataHref === href || dataHref === fullhref) return resolve();
-/******/ 				}
-/******/ 				var linkTag = document.createElement("link");
-/******/ 				linkTag.rel = "stylesheet";
-/******/ 				linkTag.type = "text/css";
-/******/ 				linkTag.onload = resolve;
-/******/ 				linkTag.onerror = function(event) {
-/******/ 					var request = event && event.target && event.target.src || fullhref;
-/******/ 					var err = new Error("Loading CSS chunk " + chunkId + " failed.\n(" + request + ")");
-/******/ 					err.code = "CSS_CHUNK_LOAD_FAILED";
-/******/ 					err.request = request;
-/******/ 					delete installedCssChunks[chunkId]
-/******/ 					linkTag.parentNode.removeChild(linkTag)
-/******/ 					reject(err);
-/******/ 				};
-/******/ 				linkTag.href = fullhref;
-/******/ 	
-/******/ 				var head = document.getElementsByTagName("head")[0];
-/******/ 				head.appendChild(linkTag);
-/******/ 			}).then(function() {
-/******/ 				installedCssChunks[chunkId] = 0;
-/******/ 			}));
-/******/ 		}
-/******/ 	};
 /******/ 	
 /******/ 	/* webpack/runtime/consumes */
 /******/ 	(() => {
@@ -636,7 +584,7 @@ __webpack_require__.d(exports, {
 /******/ 					promises.push(installedWasmModuleData);
 /******/ 				else {
 /******/ 					var importObject = wasmImportObjects[wasmModuleId]();
-/******/ 					var req = fetch(__webpack_require__.p + "" + {"199":{"652":"6b892836eab40a2e2447"}}[chunkId][wasmModuleId] + ".module.wasm");
+/******/ 					var req = fetch(__webpack_require__.p + "" + {"199":{"652":"0dc001f7d8ad9bd98cca"}}[chunkId][wasmModuleId] + ".module.wasm");
 /******/ 					var promise;
 /******/ 					if(importObject && typeof importObject.then === 'function' && typeof WebAssembly.compileStreaming === 'function') {
 /******/ 						promise = Promise.all([WebAssembly.compileStreaming(req), importObject]).then(function(items) {
