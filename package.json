@@ -1,7 +1,7 @@
 {
   "name": "@lenna-project/mobilenet",
   "version": "0.1.0",
-  "description": "",
+  "description": "Plugin to classify images.",
   "scripts": {
     "start": "webpack-cli serve --env prod=false",
     "serve": "serve dist -p 3002 --cors",
